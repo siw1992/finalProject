@@ -31,12 +31,12 @@ class Camera(object):
         self.camera.hflip = True
         self.camera.vflip = True
 
-        self.camera.start_preview()
-        self.camera.start_recording(self.path, format='h264')
+        self.camera.start_preview()                              #미리보기 시작
+        self.camera.start_recording(self.path, format='h264')   #블랙박스 녹화 시작
         print("camera recording start...")
 
         time.sleep(2)
-        stream = io.BytesIO()
+        stream = io.BytesIO()                                   #바이너리스트림 오픈
         for foo in self.camera.capture_continuous(stream, 'jpeg',use_video_port=True):
             stream.seek(0)
             self.frame = stream.read()
@@ -55,11 +55,12 @@ class Camera(object):
             test = 'MP4Box -add ' + self.path + ' ' + self.cpPath
             print(test)
             # 파이썬코드에..비밀번호를 쓰는건 좀...다른방법도 찾아보자ㅠㅠ
-            subprocess.call(
-                'sudo mount -t cifs -o user=kosta,password=kosta,file_mode=0777,dir_mode=0777 //192.168.0.133/mp4 /media/windows',
-                shell=True)
+            #라즈베리와 연동된 윈도우 계정 로그인(윈도우 공유폴더에 접근하기 위함)
+            subprocess.call('sudo mount -t cifs -o user=kosta,password=kosta,file_mode=0777,dir_mode=0777 //192.168.0.133/mp4 /media/windows',shell=True)
             time.sleep(5)
+
             print("업로드 시작...")
+            #h264파일을 mp4로 변환 후, 윈도우 공유폴더 경로에 저장
             subprocess.call('MP4Box -add ' + self.path + ' ' + self.cpPath, shell=True)
             print("영상 변환 성공")
         except:
