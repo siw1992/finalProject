@@ -21,7 +21,7 @@ public class InputCotroller {
 	@Autowired
 	private ProcessDao pao;
 	
-	@PostMapping(value="/event")
+	@RequestMapping(value="/event")
 	public String inputEvent(HttpServletRequest req, Model m) {
 		EventVO evo = new EventVO();
 		
@@ -36,12 +36,14 @@ public class InputCotroller {
 		evo.setEventYear(req.getParameter("eventYear").toString());
 		evo.setGPS(req.getParameter("GPS").toString());
 		
+		m.addAttribute("event", evo);
+		
 		pao.eventInsert(evo);
 		return "eventView";
 	}
 	
 	@RequestMapping(value = "/emergency")
-	public String inputEmergency(HttpSession session, HttpServletRequest req ,Model m) {
+	public String inputEmergency(HttpServletRequest req ,Model m) {
 		EmergencyVO emvo = new EmergencyVO();
 
 		//emvo.setFighterFighterCode((int)cs.session.getAttribute("fireFighterCode"));
@@ -60,12 +62,13 @@ public class InputCotroller {
 		emvo.setEmergencyCode(req.getParameter("emergencyCode").toString());
 		emvo.setEventSecond(req.getParameter("eventSecond").toString());
 		
+		m.addAttribute("emergency", emvo);
 		pao.emergencyInsert(emvo);
 		return "emergencyView";
 	}
 	
 	@RequestMapping(value = "/sensors")
-	public String inputSensors(HttpSession session, HttpServletRequest req, Model m) {
+	public String inputSensors(HttpServletRequest req, Model m) {
 		SensorsVO sevo = new SensorsVO();
 		
 		sevo.setFireFighterCode(1);
@@ -75,6 +78,8 @@ public class InputCotroller {
 		sevo.setTemperatureCode(req.getParameter("temperatureCode").toString());
 		sevo.setHeartRateCode(req.getParameter("heartRateCode").toString());
 		sevo.setSmokeCode(req.getParameter("smokeCode").toString());
+		
+		m.addAttribute("sensors", sevo);
 		
 		pao.sensorsInsert(sevo);
 		return "sensorsView";
