@@ -1,0 +1,18 @@
+package or.Lincoln_FinalProject.vo;
+
+public class EmergencyVO {
+	private int fireFighterCode;
+	emvo.setEmcDay(req.getParameter("emcDay").toString());
+	emvo.setEmcGPS(req.getParameter("emcGPS").toString());
+	emvo.setEmcGyro(req.getParameter("emcGyro").toString());
+	emvo.setEmcHeartRate(req.getParameter("emcHeartRate").toString());
+	emvo.setEmcHour(req.getParameter("emcHour").toString());
+	emvo.setEmcLocation(req.getParameter("emcLocation").toString());
+	emvo.setEmcMinute(req.getParameter("emcMinute").toString());
+	emvo.setEmcMonth(req.getParameter("emcMonth").toString());
+	emvo.setEmcSmoke(req.getParameter("emcSmoke").toString());
+	emvo.setEmcTemperature(req.getParameter("emcTemperature").toString());
+	emvo.setEmcYear(req.getParameter("emcYear").toString());
+	emvo.setEmergencyCode(req.getParameter("emergencyCode").toString());
+	emvo.setEventSecond(req.getParameter("eventSecond").toString());
+}

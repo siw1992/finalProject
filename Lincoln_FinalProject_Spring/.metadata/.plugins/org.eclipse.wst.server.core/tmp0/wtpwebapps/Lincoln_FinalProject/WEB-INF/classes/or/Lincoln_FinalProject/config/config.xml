@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+ <typeAliases><!-- 스프링 컨테이너에서 config 경로를 등록해놓았다. -->
+ 	<typeAlias type="or.Lincoln_FinalProject.vo.SensorsVO" alias="sevo"/>
+ 	<typeAlias type="or.Lincoln_FinalProject.vo.EmergencyVO" alias="emvo"/>
+ 	<typeAlias type="or.Lincoln_FinalProject.vo.EventVO" alias="evvo"/>
+ </typeAliases>
+</configuration>

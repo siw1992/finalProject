@@ -1,0 +1,18 @@
+package or.Lincoln_FinalProject.vo;
+
+public class EmergencyVO {
+	private int fireFighterCode;
+	private String emcDay;
+	private String emcGPS;
+	private String emcGyro;
+	private String emcHeartRate;
+	private String emcHour;
+	private String emcLocation;
+	private String emcMinute;
+	private String emcMonth;
+	private String emcSmoke;
+	private String emcTemperature;
+	private String emcYear;
+	private String emergencyCode;
+	private String eventSecond;
+}
