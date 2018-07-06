@@ -1,0 +1,71 @@
+package or.Lincoln_FinalProject.vo;
+
+public class EventVO {
+	
+	private int eventcode;
+	private String eventyear;
+	private String eventmonth;
+	private String eventday;
+	private String eventhour;
+	private String eventminute;
+	private String eventsecond;
+	public int getEventcode() {
+		return eventcode;
+	}
+	public void setEventcode(int eventcode) {
+		this.eventcode = eventcode;
+	}
+	public String getEventyear() {
+		return eventyear;
+	}
+	public void setEventyear(String eventyear) {
+		this.eventyear = eventyear;
+	}
+	public String getEventmonth() {
+		return eventmonth;
+	}
+	public void setEventmonth(String eventmonth) {
+		this.eventmonth = eventmonth;
+	}
+	public String getEventday() {
+		return eventday;
+	}
+	public void setEventday(String eventday) {
+		this.eventday = eventday;
+	}
+	public String getEventhour() {
+		return eventhour;
+	}
+	public void setEventhour(String eventhour) {
+		this.eventhour = eventhour;
+	}
+	public String getEventminute() {
+		return eventminute;
+	}
+	public void setEventminute(String eventminute) {
+		this.eventminute = eventminute;
+	}
+	public String getEventsecond() {
+		return eventsecond;
+	}
+	public void setEventsecond(String eventsecond) {
+		this.eventsecond = eventsecond;
+	}
+	public String getEventlocation() {
+		return eventlocation;
+	}
+	public void setEventlocation(String eventlocation) {
+		this.eventlocation = eventlocation;
+	}
+	public String getGPS() {
+		return GPS;
+	}
+	public void setGPS(String gPS) {
+		GPS = gPS;
+	}
+	private String eventlocation;
+	private String GPS;
+	
+	//getter/setter
+}
+

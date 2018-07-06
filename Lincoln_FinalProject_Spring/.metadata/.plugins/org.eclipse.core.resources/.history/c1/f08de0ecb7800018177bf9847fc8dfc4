@@ -1,0 +1,17 @@
+package or.Lincoln_FinalProject.mvc.dao;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import or.Lincoln_FinalProject.vo.EventVO;
+
+@Repository
+public class ProcessDao {
+	@Autowired
+	SqlSessionTemplate ss;
+	
+	public void eventInsert(EventVO evvo) {
+		
+	}
+}

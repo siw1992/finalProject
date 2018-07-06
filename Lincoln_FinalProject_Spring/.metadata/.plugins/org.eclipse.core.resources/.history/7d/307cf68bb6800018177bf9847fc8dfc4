@@ -1,0 +1,33 @@
+package or.Lincoln_FinalProject.mvc.contoller;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import or.Lincoln_FinalProject.vo.EventVO;
+
+@Controller
+public class InputCotroller {
+	
+	@PostMapping(value="/event")
+	public String inputEvent(HttpServletRequest req, Model m) {
+		EventVO evo = new EventVO();
+		
+		//EventCode가 반환 형식이 int로 다르기 때문에 한번에 받지 못하여 각각 값을 주입한다.
+		evo.setEventCode(Integer.parseInt(req.getParameter("eventCode").toString()));
+		evo.setEventDay(req.getParameter("eventDay").toString());
+		evo.setEventHour(req.getParameter("eventHour").toString());
+        evo.setEventLocation(req.getParameter("eventLocation").toString());
+		evo.setEventMinute(req.getParameter("eventMinute").toString());
+		evo.setEventMonth(req.getParameter("eventMonth").toString());
+		evo.setEventSecond(req.getParameter("eventSecond").toString());
+		evo.setEventYear(req.getParameter("eventYear").toString());
+		evo.setGPS(req.getParameter("GPS").toString());
+		
+		pao.eventInsert(evo);
+		return "eventView";
+	}
+
+}
