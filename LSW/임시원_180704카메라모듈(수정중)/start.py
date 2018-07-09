@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 from flask import Flask, request, render_template, Response
-from camera import Camera
+from camera import Camera, threading
 from multiprocessing import Process
-import time
+from sendToSpring import SendValueToServer
 
 app = Flask(__name__)
 cam = Camera()
@@ -37,9 +37,14 @@ def shutdown_server():                          #플라스크 서버를 종료�
     func()
 
 if __name__ == '__main__':
+    print("thread1 start...")
+    th = SendValueToServer()                                #thread-1 : 스프링에 센서값 전송
+    t1 = threading.Thread(target=th.sendValuesUsingThread)
+    t1.start()
+    t1.join()
+
+    print("thread2 start...")                               # thread-2 : 플라스크 시작
     server = Process(target=app.run(host='0.0.0.0', debug=False, threaded=True))    #멀티프로세스 사용(플라스크 서버 종료를 구현하기 위해 사용)
     server.start()
     server.terminate()
-    #join은 지워도 될라나
-    server.join()
-
+    server.join()#join : 해당 스레드가 끝날때까지 기다린다...

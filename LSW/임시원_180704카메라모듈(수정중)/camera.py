@@ -6,6 +6,7 @@ class Camera(object):
     last_access = 0
     now = time.localtime()
     s = "day_%04d_%02d_%02d_time_%02d%02d%02d" % (now.tm_year, now.tm_mon, now.tm_mday, now.tm_hour, now.tm_min, now.tm_sec)
+    #윈도우-라즈베리 마운트 안하고 이 경로에 접근하면 터짐
     path = '/media/pi/h264/'
     cpPath = '/media/windows/'
     str = s + '.h264'
