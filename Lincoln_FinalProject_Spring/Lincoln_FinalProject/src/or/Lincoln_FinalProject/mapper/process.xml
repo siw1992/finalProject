@@ -5,20 +5,23 @@
 <mapper namespace="process">
 
 <insert id="eventInsert" parameterType="evvo">
-	insert into event values (#{eventCode},#{eventYear},#{eventMonth},#{eventDay},#{eventHour},#{eventMinute},#{eventSecond},#{eventLocation},#{GPS})
+	insert into event values (#{eventCode},#{eventYear},#{eventMonth},#{eventDay},
+	#{eventHour},#{eventMinute},#{eventSecond},#{eventLocation},#{GPS})
 </insert>
 
 <insert id="emergencyInsert" parameterType="emvo">
-	insert into emergency values (#{emergencyCode},#{fireFighterCode},#{emcHeartRate},#{emcTemperature},#{emcSmoke},#{emcGyro},#{emcYear},#{emcMonth},#{emcDay},#{emcHour},#{emcMinute},#{eventSecond},#{emcLocation},#{emcGPS})
+	insert into emergency values (#{esvo.emergencyCode},#{fireFighterCode},#{esvo.emcHeartRate},
+	#{esvo.emcTemperature},#{esvo.emcSmoke},#{esvo.emcGyro},#{esvo.emcYear},#{esvo.emcMonth},#{esvo.emcDay},
+	#{esvo.emcHour},#{esvo.emcMinute},#{esvo.eventSecond},#{esvo.emcLocation},#{esvo.emcGPS})
 </insert>
 
-<insert id="sensorsInsert" parameterType="sevo">
+<insert id="sensorsInsert" parameterType="sfvo">
 	insert ALL 
-		into video values (#{videoCode},#{fireFighterCode},#{eventCode})
-		into temperature values (#{temperatureCode},#{fireFighterCode},#{eventCode})
-		into heartRate values (#{heartRateCode},#{fireFighterCode},#{eventCode})
-		into gyro values (#{gyroCode},#{fireFighterCode},#{eventCode})
-		into smoke values (#{smokeCode},#{fireFighterCode},#{eventCode})
+		into video values (#{sevo.videoCode},#{fireFighterCode},#{eventCode})
+		into temperature values (#{sevo.temperatureCode},#{fireFighterCode},#{eventCode})
+		into heartRate values (#{sevo.heartRateCode},#{fireFighterCode},#{eventCode})
+		into gyro values (#{sevo.gyroCode},#{fireFighterCode},#{eventCode})
+		into smoke values (#{sevo.smokeCode},#{fireFighterCode},#{eventCode})
 	select * from dual
 </insert>
 

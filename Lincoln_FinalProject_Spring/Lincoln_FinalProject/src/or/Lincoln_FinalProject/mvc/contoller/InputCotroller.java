@@ -9,9 +9,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import or.Lincoln_FinalProject.mvc.component.SessionInjection;
 import or.Lincoln_FinalProject.mvc.dao.ProcessDao;
+import or.Lincoln_FinalProject.vo.EmcSensorsVO;
 import or.Lincoln_FinalProject.vo.EmergencyVO;
 import or.Lincoln_FinalProject.vo.EventVO;
+import or.Lincoln_FinalProject.vo.SensorsFighterCodeVO;
 import or.Lincoln_FinalProject.vo.SensorsVO;
 
 @Controller
@@ -21,10 +24,14 @@ public class InputCotroller {
 	@Autowired
 	private ProcessDao pao;
 	
+	@Autowired
+	SessionInjection injec;
+	
 	@RequestMapping(value="/event")
 	public String inputEvent(HttpServletRequest req, Model m) {
 		EventVO evo = new EventVO();
 		
+		//evo.setEventCode(1);
 		//EventCode가 반환 형식이 int로 다르기 때문에 한번에 받지 못하여 각각 값을 주입한다.
 		evo.setEventCode(Integer.parseInt(req.getParameter("eventCode").toString()));
 		evo.setEventDay(req.getParameter("eventDay").toString());
@@ -43,45 +50,35 @@ public class InputCotroller {
 	}
 	
 	@RequestMapping(value = "/emergency")
-	public String inputEmergency(HttpServletRequest req ,Model m) {
+	public String inputEmergency(HttpSession session ,HttpServletRequest req ,Model m, EmcSensorsVO esvo, String emergencyCode) {
+		
 		EmergencyVO emvo = new EmergencyVO();
-
-		//emvo.setFighterFighterCode((int)cs.session.getAttribute("fireFighterCode"));
 		emvo.setFireFighterCode(1);
-		emvo.setEmcDay(req.getParameter("emcDay").toString());
-		emvo.setEmcGPS(req.getParameter("emcGPS").toString());
-		emvo.setEmcGyro(req.getParameter("emcGyro").toString());
-		emvo.setEmcHeartRate(req.getParameter("emcHeartRate").toString());
-		emvo.setEmcHour(req.getParameter("emcHour").toString());
-		emvo.setEmcLocation(req.getParameter("emcLocation").toString());
-		emvo.setEmcMinute(req.getParameter("emcMinute").toString());
-		emvo.setEmcMonth(req.getParameter("emcMonth").toString());
-		emvo.setEmcSmoke(req.getParameter("emcSmoke").toString());
-		emvo.setEmcTemperature(req.getParameter("emcTemperature").toString());
-		emvo.setEmcYear(req.getParameter("emcYear").toString());
-		emvo.setEmergencyCode(req.getParameter("emergencyCode").toString());
-		emvo.setEventSecond(req.getParameter("eventSecond").toString());
+		emvo.setEsvo(esvo);
+		System.out.println(1);
 		
 		m.addAttribute("emergency", emvo);
+		System.out.println("why so serious");
 		pao.emergencyInsert(emvo);
 		return "emergencyView";
 	}
 	
 	@RequestMapping(value = "/sensors")
-	public String inputSensors(HttpServletRequest req, Model m) {
-		SensorsVO sevo = new SensorsVO();
+	public String inputSensors(HttpServletRequest req, Model m, SensorsVO sevo) {
+		SensorsFighterCodeVO sfvo = new SensorsFighterCodeVO();
 		
-		sevo.setFireFighterCode(1);
-		sevo.setEventCode(1);
-		sevo.setVideoCode(req.getParameter("videoCode").toString());
+		sfvo.setFireFighterCode(1);
+		sfvo.setEventCode(1);
+		sfvo.setSevo(sevo);
+		/*sevo.setVideoCode(req.getParameter("videoCode").toString());
 		sevo.setGyroCode(req.getParameter("gyroCode").toString());
 		sevo.setTemperatureCode(req.getParameter("temperatureCode").toString());
 		sevo.setHeartRateCode(req.getParameter("heartRateCode").toString());
-		sevo.setSmokeCode(req.getParameter("smokeCode").toString());
+		sevo.setSmokeCode(req.getParameter("smokeCode").toString());*/
 		
-		m.addAttribute("sensors", sevo);
+		m.addAttribute("sensors", sfvo);
 		
-		pao.sensorsInsert(sevo);
+		pao.sensorsInsert(sfvo);
 		return "sensorsView";
 	}
 

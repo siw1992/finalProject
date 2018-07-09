@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import or.Lincoln_FinalProject.vo.EmergencyVO;
 import or.Lincoln_FinalProject.vo.EventVO;
+import or.Lincoln_FinalProject.vo.SensorsFighterCodeVO;
 import or.Lincoln_FinalProject.vo.SensorsVO;
 
 @Repository
@@ -21,7 +22,7 @@ public class ProcessDao {
 		ss.insert("process.emergencyInsert",emvo);
 	}
 	
-	public void sensorsInsert(SensorsVO sevo) {
-		ss.insert("process.sensorsInsert",sevo);
+	public void sensorsInsert(SensorsFighterCodeVO sfvo) {
+		ss.insert("process.sensorsInsert",sfvo);
 	}
 }

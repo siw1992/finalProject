@@ -4,12 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Insert title here</title>
+<title>noresult.jsp</title>
 </head>
 <body>
-	<a href="#">회원 가입</a><br>
-	<a href="">실시간 조회</a><br>
-	<a href="">통합 데이터 조회</a><br>
-	${fireFighterCode}
+	<div>erro : ${msg}</div>
 </body>
 </html>

@@ -7,9 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href="#">회원 가입</a><br>
-	<a href="">실시간 조회</a><br>
-	<a href="">통합 데이터 조회</a><br>
-	${fireFighterCode}
+	
 </body>
 </html>

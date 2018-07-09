@@ -7,5 +7,10 @@
  	<typeAlias type="or.Lincoln_FinalProject.vo.SensorsVO" alias="sevo"/>
  	<typeAlias type="or.Lincoln_FinalProject.vo.EmergencyVO" alias="emvo"/>
  	<typeAlias type="or.Lincoln_FinalProject.vo.EventVO" alias="evvo"/>
+ 	<typeAlias type="or.Lincoln_FinalProject.vo.EmcSensorsVO" alias="esvo"/>
+ 	<typeAlias type="or.Lincoln_FinalProject.vo.SensorsFighterCodeVO" alias="sfvo"/>
+	<typeAlias type="or.Lincoln_FinalProject.vo.FireFighterVO" alias="fvo" />
+	<typeAlias type="or.Lincoln_FinalProject.vo.MonitorsUserVO" alias="mvo" />
+	
  </typeAliases>
 </configuration>
