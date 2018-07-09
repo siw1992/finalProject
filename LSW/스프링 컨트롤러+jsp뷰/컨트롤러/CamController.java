@@ -11,9 +11,18 @@ public class CamController {
 	// CCTV
 	@RequestMapping(value = "/camTest_sep")
 	public String camTest_sep() {
-		// System.out.println("myDefaultView()");
+		//계속해서 값 보내기...
 		return "camTest_sep";
 	}
+	
+	@RequestMapping(value="/sensor")
+	public String getSensorValues(String sensorName,String status)
+	{
+		StateNumber.getStateNumber().save(sensorName,status);
+		System.out.println(sensorName + " / " + status);
+		return "getSavedValues";
+	}
+	
 	// 블랙박스
 	@RequestMapping(value = "/bbTest")
 	public String bbTest(Model m) {
