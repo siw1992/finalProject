@@ -69,7 +69,7 @@ void loop() {
   delay(1000);  
 
   //심장박동 보내는 코드
-  sprintf(heart,"h=%d",(int)value);
+  sprintf(heart,"p=%d",(int)value);
   Serial.print(heart);
   HM10.print(heart);
 
@@ -132,7 +132,7 @@ void loop() {
   Serial.println(angle) ;
   delay(1000);
   //자이로
-  sprintf(zyro,"z=%d",(int)angle);
+  sprintf(zyro,"g=%d",(int)angle);
   HM10.print(zyro);
   //온도센서
   int reading = analogRead(outputpin);  // 센서로 부터 자료값을 받는다.
@@ -144,10 +144,7 @@ void loop() {
   // 수정하여 나온 자료값을 출력한다.(섭씨, 화씨 둘다 출력)
   delay(1000);
   //온도센서  
-  //Serial.println(celsiustemp);
   sprintf(temp,"t=%d.%02d",(int)celsiustemp,(int)(celsiustemp*100)%100*(-1));
-  //Serial.print(temp);
-  //Serial.println(" Celsius");
   HM10.print(temp);
   
 }
