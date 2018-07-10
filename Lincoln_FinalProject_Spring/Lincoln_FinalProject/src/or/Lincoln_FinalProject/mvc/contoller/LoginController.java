@@ -33,7 +33,7 @@ public class LoginController {
 	// 시작하면 폼창이 뜸
 	@GetMapping("loginform")
 	public String loginform() {
-		return "login";
+		return "login2";
 	}
 	//id.pwd가 맞으면 실행
 	@PostMapping("loginProcess")
