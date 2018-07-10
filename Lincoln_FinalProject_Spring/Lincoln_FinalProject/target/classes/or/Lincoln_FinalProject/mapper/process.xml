@@ -17,11 +17,11 @@
 
 <insert id="sensorsInsert" parameterType="sfvo">
 	insert ALL 
-		into video values (#{sevo.videoCode},#{fireFighterCode},#{eventCode})
-		into temperature values (#{sevo.temperatureCode},#{fireFighterCode},#{eventCode})
-		into heartRate values (#{sevo.heartRateCode},#{fireFighterCode},#{eventCode})
-		into gyro values (#{sevo.gyroCode},#{fireFighterCode},#{eventCode})
-		into smoke values (#{sevo.smokeCode},#{fireFighterCode},#{eventCode})
+		into video values (#{sevo.videoCode},#{fireFighterCode},#{eventCode},video_seq.NEXTVAL)
+		into temperature values (#{sevo.temperatureCode},#{fireFighterCode},#{eventCode},temperature_seq.NEXTVAL)
+		into heartRate values (#{sevo.heartRateCode},#{fireFighterCode},#{eventCode},heartRate_seq.NEXTVAL)
+		into gyro values (#{sevo.gyroCode},#{fireFighterCode},#{eventCode},gyro_seq.NEXTVAL)
+		into smoke values (#{sevo.smokeCode},#{fireFighterCode},#{eventCode},smoke_seq.NEXTVAL)
 	select * from dual
 </insert>
 
