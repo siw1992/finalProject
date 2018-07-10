@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
+	
+	<!-- 어노테이션 방식의 Bean 등록. 
+		  만일 component-scan을 하지 않으면, controller 등 모든 클래스를 bean 등록 해주어야 한다.
+	-->
+	<context:component-scan base-package="or.Lincoln_FinalProject.mvc"/>
+	
+	<!-- annotation-driven = RequestMappingHandlerMapping +  RequestMappingHandlerAdapter 임포트 해준다.
+		 RequestMappingHandlerMapping : DispatcherServlet이 분류한 요청을 controller에 매핑해주는 역할
+		 RequestMappingHandlerAdapter : Controller에서 처리한 로직을 View 단으로 전달해주는 역할
+	-->
+	<mvc:annotation-driven/>
+	
+	<!-- 리소스 파일의 경로를 정해주는 역할 -->
+	<mvc:resources location="/resources/" mapping="/resources/**"/>
+	<!-- 
+	name : 주입 받을 곳에서 호출할 이름 설정
+	id : 주입 받을 곳에서 호출할 이름 설정
+	class : 주입할 객체의 클래스
+	 -->
+	<!-- dataSource setting -->
+	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="java:comp/env/jdbc/myoracle"></property>
+	</bean>
+	
+	
+	<bean id="factoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="configLocation" 
+			value="classpath:or/Lincoln_FinalProject/config/config.xml"/>
+		<property name="mapperLocations" 
+			value="classpath*:or/Lincoln_FinalProject/mapper/*.xml"/> 
+	</bean>
+	
+	<!-- MyBatis MapperFactoryBean -->
+	<!--  -->
+	<bean class = "org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name ="mapperInterface" value ="or.Lincoln_FinalProject.mvc.map.WM_Mapper"/>
+		<property name="sqlSessionFactory" ref ="factoryBean"/>
+	</bean>
+
+	<!-- constructor-arg : 생성자를 통해서 값을 지정 
+	ref : 빈 이름
+	value : 값
+	-->
+	<bean id="ss" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="factoryBean"/>
+	</bean> 
+	
+	<!--  multipartResolver 추가 : 파일 업로드를 하기 위해서 꼭 필요한 객체. -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="100000000" />
+        <property name="maxInMemorySize" value="100000000" />	
+	</bean>
+	
+	<!-- 실제 경로 /WEB-INF/jsp/hello.jsp -->
+	<!-- 스프링은 좀더 거대해 -->
+	<bean id="viewResolver"
+	class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp/"/>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+</beans>
