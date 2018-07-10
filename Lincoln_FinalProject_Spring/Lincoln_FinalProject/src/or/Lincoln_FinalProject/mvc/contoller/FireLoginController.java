@@ -20,6 +20,7 @@ public class FireLoginController {
 		
 		session.setAttribute("fireFighterCode", fireFighterCode);
 		injec.setSession("fireFighterCode", fireFighterCode);
+		System.out.println(session.getAttribute("fireFighterCode").toString());
 		m.addAttribute("fireFighterCode",session.getAttribute("fireFighterCode").toString());
 		
 		return "trans";
