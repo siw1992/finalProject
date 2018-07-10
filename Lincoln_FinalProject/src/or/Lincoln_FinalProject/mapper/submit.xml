@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FireFighter">
+    <insert id="value" parameterType="fvo">
+        insert into fireFighter values(#{fireFighterCode},#{fireStationCode},#{IP},#{fireFighterName})
+    </insert>
+    <select id="search" parameterType="fvo" resultType="int">
+    	select count(*) fireFighterCode from fireFighter where fireFighterCode=#{fireFighterCode}
+    </select>
+</mapper>

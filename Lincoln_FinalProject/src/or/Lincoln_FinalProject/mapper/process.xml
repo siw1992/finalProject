@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="process">
+
+<insert id="eventInsert" parameterType="evvo">
+	insert into event values (#{eventCode},#{eventYear},#{eventMonth},#{eventDay},
+	#{eventHour},#{eventMinute},#{eventSecond},#{eventLocation},#{GPS})
+</insert>
+
+<insert id="emergencyInsert" parameterType="emvo">
+	insert into emergency values (#{esvo.emergencyCode},#{fireFighterCode},#{esvo.emcHeartRate},
+	#{esvo.emcTemperature},#{esvo.emcSmoke},#{esvo.emcGyro},#{esvo.emcYear},#{esvo.emcMonth},#{esvo.emcDay},
+	#{esvo.emcHour},#{esvo.emcMinute},#{esvo.eventSecond},#{esvo.emcLocation},#{esvo.emcGPS})
+</insert>
+
+<insert id="sensorsInsert" parameterType="sfvo">
+	insert ALL 
+		into video values (#{sevo.videoCode},#{fireFighterCode},#{eventCode})
+		into temperature values (#{sevo.temperatureCode},#{fireFighterCode},#{eventCode})
+		into heartRate values (#{sevo.heartRateCode},#{fireFighterCode},#{eventCode})
+		into gyro values (#{sevo.gyroCode},#{fireFighterCode},#{eventCode})
+		into smoke values (#{sevo.smokeCode},#{fireFighterCode},#{eventCode})
+	select * from dual
+</insert>
+
+<select id="sensorsSelect" resultType="sevo">
+	select 
+</select>
+
+
+</mapper>
