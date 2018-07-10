@@ -17,7 +17,7 @@ import or.Lincoln_FinalProject.vo.FireFighterVO;
 
 
 @Controller
-public class SubmitController {
+public class RegisterMemberController {
 	@Autowired
 	private FireFighterDAO dao;
 	
