@@ -48,7 +48,7 @@ public class RegisterMemberController {
 	     
 	      return null;
 	   }
-	
+
 		@PostMapping(value="/insert_action")
 		public String upload(Model model,HttpServletRequest req) {
 			FireFighterVO vo = new FireFighterVO();
@@ -60,5 +60,5 @@ public class RegisterMemberController {
 			dao.isReady(vo);
 			model.addAttribute("vo", vo);
 			return "";
-		}
+		}	
 }
