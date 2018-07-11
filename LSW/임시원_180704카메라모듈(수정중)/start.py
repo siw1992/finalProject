@@ -2,8 +2,7 @@
 from flask import Flask, request, render_template, Response
 from camera import Camera, threading
 from multiprocessing import Process
-from sendToSpring import SendValueToServer
-from sendTest import MyDelegate
+from sendToSpring2 import MyDelegate
 
 app = Flask(__name__)
 cam = Camera()
@@ -11,14 +10,14 @@ cam = Camera()
 @app.route('/rec')                             #IP:5000/rec으로 접근 시, 녹화 시작
 def index():
     return render_template('index.html')      #비디오 스트리밍 html(/templates/안의 index.html)
+
 @app.route('/stop')                            #IP:5000/stop으로 접근 시, 녹화종료 후 플라스크 종료
 def stop():
-    th.stopSend()                               #센서값 보내기 종료...
-
-    cam.stopRec()                               #녹화 종료
-    shutdown_server()                           #플라스크 종료
+    th.stopThread() # 센서값 보내기 종료...
+    cam.stopRec()   # 녹화 종료
+    shutdown_server()   #플라스크 종료
     print("camera recording end...")
-    return '* FLASK SERVER CLOSED *'         #html에 플라스크서버 종료 메시지 띄우기
+    return '* FLASK SERVER CLOSED *'    #html에 플라스크서버 종료 메시지 띄우기
 
 @app.route('/video_feed')
 def video_feed():
@@ -40,14 +39,10 @@ def shutdown_server():                          #플라스크 서버를 종료�
     func()
 
 if __name__ == '__main__':
-    print("thread1 start...")
-    th = MyDelegate(0)                             #thread-1 : 스프링에 센서값 전송
-    t1 = threading.Thread(target=th.sendValuesUsingThread())
-    t1.start()
-    t1.join()
-
-    print("thread2 start...")                               # thread-2 : 플라스크 시작
-    server = Process(target=app.run(host='0.0.0.0', debug=False, threaded=True))    #멀티프로세스 사용(플라스크 서버 종료를 구현하기 위해 사용)
+    print("send-thread start...")
+    th = MyDelegate(0)             # thread-1 : 블루투스로 센서값 받아옴->스프링으로 값보내기 시작
+    print("cam-thread start...")  # thread-2 : 플라스크 시작
+    server = Process(target=app.run(host='0.0.0.0', debug=False, threaded=True))  # 멀티프로세스 사용(플라스크 서버 종료를 구현하기 위해 사용)
     server.start()
     server.terminate()
-    server.join()#join : 프로세스 닫기
+    #server.join()

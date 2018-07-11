@@ -1,3 +1,4 @@
+import subprocess
 import threading, time
 from urllib.request import urlopen
 from bluepy import btle
@@ -8,11 +9,14 @@ class MyDelegate(btle.DefaultDelegate):
     p = ""  # 심박수 값 받아오기
     s = ""  # 연기 값 받아오기
     t = ""  # 온도 값 받아오기
+    IP = ""
     cnt=0
     stopValue=0
 
     def __init__(self, params):
-        print("init...")
+        print("set IP...")
+        t = subprocess.check_output('hostname -I', shell=True)
+        self.IP = t.decode().split(" ")[0]
         self.sendValuesUsingThread()
         btle.DefaultDelegate.__init__(self)
 
@@ -39,7 +43,7 @@ class MyDelegate(btle.DefaultDelegate):
 
         #공백값이 없을때만 스프링에 전송
         if (str(self.g) != "" and str(self.p) != "" and str(self.s) != "" and str(self.t) != ""):
-            if self.cnt > 3:
+            if self.cnt > 11:
                 self.sv()
                 self.cnt=0
         self.cnt+=1
@@ -61,7 +65,7 @@ class MyDelegate(btle.DefaultDelegate):
             if (self.stopValue != str(1)) :
                 for i in range(len(sensors)):
                     if values[i] != "":
-                        url = "http://192.168.0.133/spring0615_mvc/sensor?sensorName="+sensors[i]+"&status="+values[i]
+                        url = "http://192.168.0.133/spring0615_mvc/sensor?name="+self.IP+"&sensorName="+sensors[i]+"&status="+values[i]
                         print("send val : " + sensors[i] + " / " + values[i])
                         urlopen(url)
                     else:
