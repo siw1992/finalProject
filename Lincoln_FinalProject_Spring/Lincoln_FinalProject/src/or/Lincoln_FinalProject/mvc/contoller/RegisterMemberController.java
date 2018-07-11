@@ -68,4 +68,23 @@ public class RegisterMemberController {
 			model.addAttribute("vo", "test");
 			return "";
 		}
+		
+		//머지 테스트222~!
+		@PostMapping(value="/merge_test3")
+		public String upload4(Model model,HttpServletRequest req) {
+			model.addAttribute("vo", "test");
+			return "";
+		}
+		//머지 테스트~!
+		@PostMapping(value="/merge_test")
+		public String upload2(Model model,HttpServletRequest req) {
+			model.addAttribute("vo", "test");
+			return "";
+		}
+		//머지 테스트222~!
+		@PostMapping(value="/merge_test2")
+		public String upload3(Model model,HttpServletRequest req) {
+			model.addAttribute("vo", "test");
+			return "";
+		}
 }
