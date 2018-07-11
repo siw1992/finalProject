@@ -61,4 +61,11 @@ public class RegisterMemberController {
 			model.addAttribute("vo", vo);
 			return "aaaaaa";
 		}	
+
+		//머지 테스트-siwon
+		@PostMapping(value="/merge_test")
+		public String upload_siwon(Model model,HttpServletRequest req) {
+			model.addAttribute("vo", "test");
+			return "";
+		}
 }
