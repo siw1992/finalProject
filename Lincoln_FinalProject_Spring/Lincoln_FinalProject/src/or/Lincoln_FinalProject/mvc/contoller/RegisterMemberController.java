@@ -48,7 +48,7 @@ public class RegisterMemberController {
 	     
 	      return null;
 	   }
-	
+
 		@PostMapping(value="/insert_action")
 		public String upload(Model model,HttpServletRequest req) {
 			FireFighterVO vo = new FireFighterVO();
@@ -59,6 +59,32 @@ public class RegisterMemberController {
 			//fao.isAlready(vo);
 			dao.isReady(vo);
 			model.addAttribute("vo", vo);
+			return "aaaaaa";
+		}	
+
+		//머지 테스트-siwon
+		@PostMapping(value="/merge_test")
+		public String upload_siwon(Model model,HttpServletRequest req) {
+			model.addAttribute("vo", "test");
+			return "";
+		}
+		
+		//머지 테스트222~!
+		@PostMapping(value="/merge_test3")
+		public String upload4(Model model,HttpServletRequest req) {
+			model.addAttribute("vo", "test");
+			return "";
+		}
+		//머지 테스트~!
+		@PostMapping(value="/merge_test")
+		public String upload2(Model model,HttpServletRequest req) {
+			model.addAttribute("vo", "test");
+			return "";
+		}
+		//머지 테스트222~!
+		@PostMapping(value="/merge_test2")
+		public String upload3(Model model,HttpServletRequest req) {
+			model.addAttribute("vo", "test");
 			return "";
 		}
 }
