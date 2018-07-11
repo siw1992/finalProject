@@ -59,6 +59,6 @@ public class RegisterMemberController {
 			//fao.isAlready(vo);
 			dao.isReady(vo);
 			model.addAttribute("vo", vo);
-			return "";
+			return "aaaaaa";
 		}	
 }
