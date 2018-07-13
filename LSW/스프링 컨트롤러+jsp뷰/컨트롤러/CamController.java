@@ -19,11 +19,16 @@ public class CamController {
 	@RequestMapping(value = "/getValues")
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
-	public Object getValues(String name)
+	public synchronized Object getValues(String name)
 	{
-		if(name==null || this.name==null || name.equals("0")) return "error";
+		System.out.println("name : "+name);
+		System.out.println("this.name : "+this.name);
 		
-		System.out.println("get values of : "+name);
+		//if(name==null || this.name==null || name.equals("0")) return "error";
+		if(name==null || this.name==null || name.equals("0"))
+		{
+			return "error";
+		}
 		StringBuffer sb = new StringBuffer();
 		try
 		{
@@ -55,18 +60,26 @@ public class CamController {
 	}
 	
 	@RequestMapping(value="/sensor")
-	public String getSensorValues(String name,String sensorName,String status)
+	public synchronized String getSensorValues(String name,String sensorName,String status)
 	{
 		StateNumber.getStateNumber().save(name,sensorName,status);
 		System.out.println(name+"/"+sensorName+"/"+status);
+		this.name = name;
+		return "getSavedValues";
+	}
+	
+	@RequestMapping(value="/close")
+	public synchronized String close()
+	{
+		this.name = null;
 		return "getSavedValues";
 	}
 	
 	// 블랙박스
 	@RequestMapping(value = "/bbTest")
-	public String bbTest(Model m) {
+	public synchronized String bbTest(Model m) {
 		//이것도 분리 해야함
-		String path = "C:\\kosta182\\spring\\workspace\\spring0615_mvc\\BlackBox\\mp4";
+		String path = "C:\\kosta182\\spring\\workspace\\spring0615_mvc\\BlackBox\\mp4\\1";
 		File d = new File(path);
 		File fileList[] = d.listFiles();
 		StringBuffer sb = new StringBuffer();

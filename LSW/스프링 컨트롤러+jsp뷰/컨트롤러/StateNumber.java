@@ -11,13 +11,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import or.kosta.vo.cSensorVO;
+import or.kosta.vo.FFVO;
 
 public class StateNumber {
 	private static StateNumber stateNumber;
 	private static String PATH;
 	// 소방관1,소방관2(이름과,각 센서 PATH 갖고있음)
-	private cSensorVO[] f = new cSensorVO[2];
+	private FFVO[] f = new FFVO[2];
 	private String NAME;// 이름은 임의로 정한것 뿐임.IP값이든 뭐든 OK
 	private String GYRO;//자이로센서값
 	private String PULSE;//심박센서값
@@ -28,7 +28,7 @@ public class StateNumber {
 		if (stateNumber == null) {
 			stateNumber = new StateNumber();
 			for (int i = 0; i < 2; i++) {
-				stateNumber.f[i] = new cSensorVO();
+				stateNumber.f[i] = new FFVO();
 				switch (i) {
 				case 0:
 					stateNumber.NAME = "192.168.0.132";
@@ -55,7 +55,7 @@ public class StateNumber {
 		return stateNumber;
 	}
 
-	public void save(String name, String sensorName, String status) {
+	public synchronized void save(String name, String sensorName, String status) {
 		// 한줄한줄, 이어서 저장한다
 		if (status.equals("")) {
 			System.out.println("공백");
@@ -78,7 +78,7 @@ public class StateNumber {
 		}
 	}
 
-	public String view(String name, String sensorName) {
+	public synchronized String view(String name, String sensorName) {
 		String status = "";
 		StringBuffer sb = new StringBuffer();
 		BufferedReader br = null;
@@ -98,7 +98,7 @@ public class StateNumber {
 	}
 
 	// 실시간 센서값을 컨트롤러에게 넘겨준다(소방관이름,센서(g:0,p:1,s:2,t:3)
-	public static String getSensorValues(String name, int sNum) {
+	public synchronized static String getSensorValues(String name, int sNum) {
 		// 누구의 정보가 들어왔는가?
 		int index = stateNumber.fNum(name);
 		switch (sNum) {
@@ -115,7 +115,7 @@ public class StateNumber {
 	}
 
 	// 파일경로를 지정한다(소방관이름,센서이름,센서값)
-	private void setPath(String name, String sensorName, String status) {
+	private synchronized void setPath(String name, String sensorName, String status) {
 		// 누구의 정보가 들어왔는가?
 		int index = fNum(name);
 		switch (sensorName) {
@@ -138,7 +138,7 @@ public class StateNumber {
 		}
 	}
 	// 파일경로를 지정한다(소방관이름,센서이름)
-	private void setPath(String name, String sensorName) {
+	private synchronized void setPath(String name, String sensorName) {
 		// 누구의 정보가 들어왔는가?
 		int index = fNum(name);
 		switch (sensorName) {
@@ -157,7 +157,7 @@ public class StateNumber {
 		}
 	}
 
-	private int fNum(String name) {
+	private synchronized int fNum(String name) {
 		// 누구의 정보가 들어왔는가?
 		int index = 0;
 		switch (name) {
